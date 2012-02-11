@@ -45,7 +45,7 @@ class Option(models.Model):
     title = models.CharField(max_length=200)
     amount = models.FloatField(default=0)
     category = models.ForeignKey(Category, default=1)
-    optiongroup = models.ForeignKey(Optiongroup, null=True, blank=True)
+    optiongroup = models.ForeignKey(Optiongroup, null=True, blank=True, default=1)
     order = models.IntegerField(default=1)
 
     class Meta:
