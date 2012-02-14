@@ -97,6 +97,7 @@ jQuery(document).ready(function($) {
                     }
                     
                 });
+                $(".alert").hide("slow");
                 $('html, body').animate({scrollTop:0}, 'slow');
             }, 
             "json"
