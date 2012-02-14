@@ -32,8 +32,8 @@
           <div class="nav-collapse collapse">
             <ul class="nav">
               <li class="divider-vertical"></li>
-              <li class="budget-figure">You've filled: <span class="filled">$ 0</span></li>
-              <li class="budget-figure">You still need to find: <span class="missing">$ 161,000,000</span></li>
+              <li class="budget-figure">You've filled: <span class="filled">$0</span></li>
+              <li class="budget-figure">You still need to find: <span class="missing">$161,000,000</span></li>
             </ul>
           </div>
         </div>
@@ -44,7 +44,7 @@
     <div class="container">
 
       <header class="page-header">
-        <p class="lead">Please use the options below to fill the <b>$ 161 million MBTA budget gap</b> with revenues and savings.</p>
+        <p class="lead">Please use the options below to fill the <b>$161 million MBTA budget gap</b> with revenues and savings.</p>
       </header>
 
       {% regroup options by category as category_list %}
@@ -68,7 +68,7 @@
           {% endfor %}
           {% else %}
           {% for option in optiongroup.list %}
-          <label class="checkbox"><input class="budget-change" type="checkbox" value="{{ option.amount }}" id="option_{{ option.id }}">{{ option.title }}</label>
+          <label class="checkbox"><input class="budget-change" type="checkbox" value="{{ option.amount }}">{{ option.title }}</label>
           {% endfor %}
           {% endif %}
           {% endfor %}
@@ -76,30 +76,6 @@
 
       </section>
     {% endfor %}
-      
-      <section>
-        <div id="error-nobudget" class="alert alert-block alert-error fade in">
-            <a class="close" href="#">&times;</a>
-            <h4 class="alert-heading">Error: Empty budget.</h4>
-            <p>Please adjust your budget before you submit your proposal.</p>
-        </div>
-        <div id="error-noemail" class="alert alert-block alert-error fade in">
-            <a class="close" href="#">&times;</a>
-            <h4 class="alert-heading">Error: Email is not valid.</h4>
-            <p>Please enter a valid email address. We won't share your personal information. Unique email addresses help us to improve our results.</p>
-        </div>
-        <form id="budget-form" action="{% url budgetcalc-index %}">
-          <div class="form-actions">
-            <p class="lead">Submit your budget proposal and see aggregated results from other users.</p>
-            {% csrf_token %}
-            <div class="input-prepend">
-              <span class="add-on"><i class="icon-envelope"></i></span>
-              <input type="text" class="input-xlarge" placeholder="Your Email (required) ..." id="email"></div>
-            <div>
-            <button id="budget-btn" class="btn btn-large btn-primary" href="#">Submit</button></div>
-          </div>
-        </form>
-      </section>
 
     </div> <!-- /container -->
 
