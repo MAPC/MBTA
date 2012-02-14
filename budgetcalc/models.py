@@ -54,7 +54,26 @@ class Option(models.Model):
         ordering = ['order']
 
     def __unicode__(self):
-        return self.title
+        return "%s: %s" % (self.optiongroup, self.title)
+
+
+class Submission(models.Model):
+    """
+    Selected options  and budget (filled) per email address.
+    """
+
+    email = models.EmailField()
+    budget = models.FloatField('Budget filled', default=0)
+    options = models.ManyToManyField(Option, null=True, blank=True, related_name='selected_options')
+
+    class Meta:
+        verbose_name = _('Submission')
+        verbose_name_plural = _('Submissions')
+
+    def __unicode__(self):
+        return self.email
+    
+
     
 
     
