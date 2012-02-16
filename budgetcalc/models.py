@@ -63,7 +63,7 @@ class Submission(models.Model):
     """
 
     email = models.EmailField()
-    budget = models.FloatField('Budget filled', default=0)
+    budget = models.FloatField('Budget gap', default=0)
     options = models.ManyToManyField(Option, null=True, blank=True, related_name='selected_options')
 
     class Meta:

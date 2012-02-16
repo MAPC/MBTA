@@ -19,7 +19,7 @@ def index(request):
     elif request.method == 'POST':
 
         email = request.POST.get('email').lower()
-        budget = float(request.POST.get('filled'))
+        budget = float(request.POST.get('gap'))
 
         if Submission.objects.filter(email__icontains=email).exists():
             # update existing

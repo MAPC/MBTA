@@ -1,5 +1,35 @@
+a {
+    color: #044388;
+}
+
 /* Topnav budget numbers
 -------------------------------------------------- */
+
+.navbar .mapc-masthead {
+  border-radius: 0 0 0 0;
+  padding-left: 0;
+  padding-right: 0;
+  background-color: #8C96A0;
+  height: 100px;
+ /* border-bottom: solid 1px #044388;*/
+ overflow: hidden;
+}
+
+.mapc-masthead .container {
+  padding-top: 20px;
+}
+
+.navbar .tally {
+  border-radius: 0 0 0 0;
+  padding: 8px 0 0px 0;
+  height: 64px;
+  background-color: #fff;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 28px;
+  border-bottom: 1px solid #8C96A0;
+}
+
 .nav .budget-figure {
   float: none;
   padding: 10px 10px 11px;
@@ -9,14 +39,17 @@
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
 
-span.missing {
-  color: #B94A48;
-  font-weight: bold;
+.budget-gap, .ridership {
+  font-weight: 700;
+  white-space:  nowrap;
 }
 
-span.filled {
+.budget-gap {
+  color: #B94A48;
+}
+
+.ridership {
   color: #468847;
-  font-weight: bold;
 }
 
 
@@ -42,7 +75,7 @@ hr.soften {
 -------------------------------------------------- */
 .page-header {
   position: relative;
-  padding-top: 60px;
+  padding-top: 180px;
 }
 .page-header h1 {
   margin-bottom: 9px;
@@ -56,7 +89,6 @@ hr.soften {
 }
 
 
-
 /* Budget options
 -------------------------------------------------- */
 .category-header {
@@ -64,10 +96,15 @@ hr.soften {
   margin-bottom: 5px;
 }
 
-/* Space out h3s when following a section */
-.budget h3 {
-  margin-bottom: 5px;
+.category-header h1 {
+  color: #044388;
 }
+
+.category-header h1 small {
+  margin-left: 10px;
+}
+
+/* Space out h3s when following a section */
 .budget-builder input + h3,
 .budget-builder .checkbox + h3 {
   margin-top: 9px;
@@ -86,9 +123,9 @@ hr.soften {
 
 /* Custom, larger checkbox labels */
 .budget .checkbox, .budget .radio {
-  padding: 6px 10px 6px 25px;
+  padding: 0 10px 0 25px;
   color: #555;
-  background-color: #f9f9f9;
+  
   -webkit-border-radius: 3px;
      -moz-border-radius: 3px;
           border-radius: 3px;
@@ -101,6 +138,15 @@ hr.soften {
 .budget .checkbox small {
   font-size: 12px;
   color: #777;
+}
+
+.budget-builder tr.input {
+  background-color: #f9f9f9;
+}
+
+.budget-builder .impact {
+  text-align: center;
+  color: #555;
 }
 
 /* Variables section */
@@ -125,24 +171,26 @@ hr.soften {
 .budget p {
   margin-bottom: 18px;
 }
-.budget-btn .btn {
-  display: block;
-  width: auto;
-  padding: 19px 24px;
-  margin-bottom: 27px;
-  font-size: 30px;
-  line-height: 1;
-  text-align: center;
-  -webkit-border-radius: 6px;
-     -moz-border-radius: 6px;
-          border-radius: 6px;
+#budget-btn.btn {
+  background-color: #044388;
+  background-image: -moz-linear-gradient(center top , #4374a5, #044388);
+  background-repeat: repeat-x;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
 }
 
 .radio .label, .checkbox .label {
   font-size: 13px;
   margin: 0 6px;
+  padding: 3px 6px;
 }
 
+.label-info {
+  background-color: #044388;
+}
+
+label {
+  margin-bottom: 0px;
+}
 
 /* More Bootstrap
 -------------------------------------------------- */
@@ -163,4 +211,67 @@ hr.soften {
   opacity: 0.4;
   filter: alpha(opacity=40);
   cursor: pointer;
+}
+
+/* Footer
+-------------------------------------------------- */
+
+.footer {
+  margin-top: 45px;
+  padding: 35px 0 36px;
+  border-top: 1px solid #E5E5E5;
+}
+
+.footer p {
+  margin-bottom: 0;
+  color: #555;
+}
+
+/* Responsive design
+-------------------------------------------------- */
+
+@media (max-width: 480px) {
+  .page-header {
+    position: relative;
+    padding-top: 0px;
+  }  
+}
+
+
+@media (max-width: 768px) {
+  .page-header {
+    position: relative;
+    padding-top: 0px;
+  } 
+  .navbar .tally {
+    height: 130px;
+  }
+  .tally .container {
+    padding: 0 20px;
+  }
+  .mapc-masthead .container {
+    padding-left: 20px;
+  }
+  #mapc-tagline {
+    display: none;
+  }
+}
+
+
+@media (min-width: 768px) and (max-width: 980px) {
+  .page-header {
+    position: relative;
+    padding-top: 0px;
+  }
+  .tally .container  {
+    padding: 0 20px;
+  }
+  .mapc-masthead .container {
+    padding-left: 20px;
+  }
+}
+
+
+@media (min-width: 1200px) {
+
 }
