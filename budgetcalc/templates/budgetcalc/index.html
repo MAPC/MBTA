@@ -26,18 +26,16 @@
 
   <body>
     
-
     <div class="navbar navbar-fixed-top">
       <div class="mapc-masthead"><div class="container"><img src="{{ STATIC_URL }}budgetcalc/img/mapc-logo.png" alt="Metropolitan Area Planning Council" width="124" height="64" /><img id="mapc-tagline" src="{{ STATIC_URL }}budgetcalc/img/mapc-tagline.png" alt="Metropolitan Area Planning Council" width="475" height="54" /><img src="{{ STATIC_URL }}budgetcalc/img/nu-policy-logo.png" alt="Northeastern University" width="226" height="59" /></div></div>
       <div class="tally">
         <div class="container">
           <div class="row">
-            <div class="span3">Budget gap:</div>
-            <div class="span3 budget-gap">$ 161,000,000</span></div>
+            <div class="span8">MBTA Budget Calculator: How Would You Fix the T's Budget?</div>
           </div>
           <div class="row">
-            <div class="span3">Ridership impact:</div>
-            <div class="span3 ridership">0</div>
+            <div class="span4 figure">Budget Deficit: <span class="budget-gap">$ 161,000,000</span></div>
+            <div class="span4 figure">You've filled: <span class="budget-filled"></span></div>
           </div>
         </div>
       </div>
@@ -45,9 +43,12 @@
 
     <div class="container">
 
-      <header class="page-header">
-        <p class="lead">Please use the options below to fill the <b>$ 161 million MBTA budget gap</b> with revenues and savings.</p>
-      </header>
+      <div class="row">
+         <header class="page-header span8">
+           <p class="lead">Please use the options below to fill the <b>$ 161 million MBTA budget gap</b> with revenues and savings.</p>
+         </header>
+      </div>
+      
 
       {% regroup options by category as category_list %}
 

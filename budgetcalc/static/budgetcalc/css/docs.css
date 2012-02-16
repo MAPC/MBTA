@@ -30,16 +30,11 @@ a {
   border-bottom: 1px solid #8C96A0;
 }
 
-.nav .budget-figure {
-  float: none;
-  padding: 10px 10px 11px;
-  line-height: 19px;
-  color: white;
-  font-size: 16px;
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+.tally .figure {
+/*  white-space:  nowrap;*/
 }
 
-.budget-gap, .ridership {
+.budget-gap, .budget-filled {
   font-weight: 700;
   white-space:  nowrap;
 }
@@ -48,8 +43,9 @@ a {
   color: #B94A48;
 }
 
-.ridership {
+.budget-filled {
   color: #468847;
+  min-width: 200px;
 }
 
 
@@ -265,7 +261,7 @@ label {
     padding-top: 0px;
   } 
   .navbar .tally {
-    height: 130px;
+    height: 90px;
   }
   .tally .container {
     padding: 0 20px;
@@ -283,6 +279,9 @@ label {
   .page-header {
     position: relative;
     padding-top: 0px;
+  }
+  .navbar .tally {
+    height: 120px;
   }
   .tally .container  {
     padding: 0 20px;

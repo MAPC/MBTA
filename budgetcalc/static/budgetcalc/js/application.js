@@ -59,7 +59,7 @@ jQuery(document).ready(function($) {
                 budget["gap"] -= parseInt($(this).val());
             }
         });
-        // $(".budget-bui .filled").html("$ " + addCommas(budget["filled"]));
+        $(".tally .budget-filled").html("$ " + addCommas(budget["filled"]));
         $(".tally .budget-gap").html("$ " + addCommas(budget["gap"]));
         if (budget["gap"] < 0) $(".tally .budget-gap").css("color", "#468847");
         if ($("#error-nobudget").is(':visible')) $("#error-nobudget").hide("slow");
@@ -89,7 +89,7 @@ jQuery(document).ready(function($) {
             function (data) {
                 // some result stats
                 $("header.page-header").empty();
-                $("header.page-header").append("<p class='lead'>" + data["budget__count"] + " users worked on the <b>MBTA budget gap</b> and achieved an average of <span class='budget-gap'>$ " + addCommas(parseInt(data["budget__avg"])) + "</span>.</p><p class='lead'>See the total number of selections per option below.</p>");
+                $("header.page-header").append("<p class='lead'>" + data["budget__count"] + " users worked on the <b>MBTA budget gap</b> and filled it by an average of <span class='budget-filled'>$ " + addCommas(parseInt(data["budget__avg"])) + "</span>.</p><p class='lead'>See the total number of selections per option below.</p>");
                 $.each(data["options"], function(option, nr) {
                     if ($("#option_nr_" + option).length === 0) {
                         $("#option_" + option).parent().prepend("<span id='option_nr_" + option + "' class='label label-info'>&times; " + nr + "</span>");
