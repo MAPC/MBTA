@@ -43,7 +43,9 @@ class Option(models.Model):
     """
 
     title = models.CharField(max_length=200)
-    amount = models.FloatField(default=0)
+    desc = models.TextField('Short description', null=True, blank=True)
+    amount = models.FloatField('Revenue or Savings', default=0)
+    ridership = models.IntegerField('Ridership impact', null=True, blank=True)
     category = models.ForeignKey(Category, default=1)
     optiongroup = models.ForeignKey(Optiongroup, null=True, blank=True, default=1)
     order = models.IntegerField(default=1)
