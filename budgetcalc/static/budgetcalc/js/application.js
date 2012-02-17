@@ -89,8 +89,7 @@ jQuery(document).ready(function($) {
             budget,
             function (data) {
                 // some result stats
-                $("header.page-header").empty();
-                $("header.page-header").append("<p class='lead'>" + data["budget__count"] + " users worked on the <b>MBTA budget gap</b> and filled it by an average of <span class='budget-filled'>$ " + addCommas(parseInt(data["budget__avg"])) + "</span>.</p><p class='lead'>See the total number of selections per option below.</p>");
+                $(".page-header .lead").html(data["budget__count"] + " users worked on the <b>MBTA budget gap</b> and filled it by an average of <span class='budget-filled'>$ " + addCommas(parseInt(data["budget__avg"])) + "</span>.<br>See the total number of selections per option below.");
                 $.each(data["options"], function(option, nr) {
                     if ($("#option_nr_" + option).length === 0) {
                         $("#option_" + option).parent().prepend("<span id='option_nr_" + option + "' class='label label-info'>&times; " + nr + "</span>");
@@ -99,10 +98,15 @@ jQuery(document).ready(function($) {
                     }
                 });
                 $(".alert").hide("slow");
-                $(".twitter-share-button").remove();
-                $(".twitterwidget").prepend("<a href='https://twitter.com/share' class='twitter-share-button' data-text='I worked on the MBTA Budget and filled it by $ " + addCommas(budget['filled']) + "!' data-size='large' data-via='MAPCMetroBoston'>Tweet</a>");
-                // re-evaluate twitter widget
-                twttr.widgets.load();
+                try {
+                    $(".twitter-share-button").remove();
+                    $(".twitterwidget").prepend("<a href='https://twitter.com/share' class='twitter-share-button' data-text='I worked on the MBTA Budget and filled it by $ " + addCommas(budget['filled']) + "!' data-size='large' data-via='MAPCMetroBoston'>Tweet</a>");
+                    // re-evaluate twitter widget
+                    twttr.widgets.load();
+                } catch (e) {
+                    // twitter widget not available
+                    $(".twitterwidget").remove();
+                }
                 $("html, body").animate({scrollTop:0}, "slow");
             }, 
             "json"
