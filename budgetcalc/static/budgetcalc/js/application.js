@@ -98,8 +98,12 @@ jQuery(document).ready(function($) {
                         $("#option_nr_" + option).html("&times; " + nr);
                     }
                 });
-                $('html, body').animate({scrollTop:0}, 'slow');
                 $(".alert").hide("slow");
+                $(".twitter-share-button").remove();
+                $(".twitterwidget").prepend("<a href='https://twitter.com/share' class='twitter-share-button' data-text='I worked on the MBTA Budget and filled it by $ " + addCommas(budget['filled']) + "!' data-size='large' data-via='MAPCMetroBoston'>Tweet</a>");
+                // re-evaluate twitter widget
+                twttr.widgets.load();
+                $("html, body").animate({scrollTop:0}, "slow");
             }, 
             "json"
         );
