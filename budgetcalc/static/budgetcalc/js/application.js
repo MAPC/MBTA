@@ -3,7 +3,6 @@ jQuery(document).ready(function($) {
     var budget = {};
 
     // utils
-
     // simple validations
     $(".alert").hide();
     $(".alert .close").on('click', function (e) {
@@ -14,7 +13,6 @@ jQuery(document).ready(function($) {
         var regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
         return regex.test(email);
     }
-
     // taken from http://www.mredkj.com/javascript/numberFormat.html#addcommas
     var addCommas = function (nStr) {
         nStr += '';
@@ -28,13 +26,16 @@ jQuery(document).ready(function($) {
         return x1 + x2;
     }
 
-
     // form utils
-    $(".budget-builder .clear")
+    // popovers
+    $(".budget-builder .input label")
     .popover({
-        title: "Clear this options",
-        content: "Removes your selections from this section"
+        placement: "top"
     })
+    $(".budget-builder .optiongroup")
+    .popover()
+    $(".budget-builder .clear")
+    .popover()
     .on("click", function () {
         var optionGroup = $(this).attr("name");
         $("input[name='" + optionGroup + "']").prop("checked", false);
@@ -45,7 +46,7 @@ jQuery(document).ready(function($) {
         updateBudget();
     });  
 
-    // update budget figures
+    // update budget tally
     var updateBudget = function () {
         budget = {
             "options" : [],
@@ -103,7 +104,5 @@ jQuery(document).ready(function($) {
             "json"
         );
     });
-
-
 
 });

@@ -35,7 +35,7 @@
           </div>
           <div class="row">
             <div class="span4 figure">Budget Deficit: <span class="budget-gap">$ 161,000,000</span></div>
-            <div class="span4 figure">You've filled: <span class="budget-filled"></span></div>
+            <div class="span4 figure">You've filled: <span class="budget-filled">$ 0</span></div>
           </div>
         </div>
       </div>
@@ -74,16 +74,16 @@
           {% regroup category.list by optiongroup as optiongroup_list %}
           {% for optiongroup in optiongroup_list %}
               <tr>
-                <td colspan="3"><h3>{{ optiongroup.grouper }}{% if optiongroup.grouper.id != 1 %}<a class="clear" name="{{ optiongroup.grouper|slugify }}">&times;</a>{% endif %}</h3></td>
+                <td colspan="3"><h3>{% if optiongroup.grouper.desc %}<a class="optiongroup" title="Details" data-content="{{ optiongroup.grouper.desc }}">{% endif %}{{ optiongroup.grouper }}{% if optiongroup.grouper.desc %}</a>{% endif %}{% if optiongroup.grouper.id != 1 %}<a class="clear" name="{{ optiongroup.grouper|slugify }}" title="Clear" data-content="Removes your selections from {{ optiongroup.grouper }}">&times;</a>{% endif %}</h3></td>
               </tr>
 
               {% if optiongroup.grouper.id != 1 %}
               {% for option in optiongroup.list %}  
                    
               <tr class="input">
-                <td><label class="radio"><input class="budget-change" type="radio" value="{{ option.amount }}" name="{{ optiongroup.grouper|slugify }}" id="option_{{ option.id }}">{{ option.title }}</label></td>
+                <td><label class="radio"{% if option.desc %} title="Details" data-content="{{ option.desc }}"{% endif %}><input class="budget-change" type="radio" value="{{ option.amount }}" name="{{ optiongroup.grouper|slugify }}" id="option_{{ option.id }}">{{ option.title }}</label></td>
                 <td class="impact">$ {{ option.amount|intword }}</td>
-                <td class="impact">0</td>
+                <td class="impact">{{ option.ridership|default_if_none:"-"|intcomma }}</td>
               </tr>
 
               {% endfor %}
@@ -91,9 +91,9 @@
               {% for option in optiongroup.list %}
 
               <tr class="input">
-                <td><label class="checkbox"><input class="budget-change" type="checkbox" value="{{ option.amount }}" id="option_{{ option.id }}">{{ option.title }}</label></td>
+                <td><label class="checkbox"{% if option.desc %} title="Details" data-content="{{ option.desc }}"{% endif %}><input class="budget-change" type="checkbox" value="{{ option.amount }}" id="option_{{ option.id }}">{{ option.title }}</label></td>
                 <td class="impact">$ {{ option.amount|intword }}</td>
-                <td class="impact">0</td>
+                <td class="impact">{{ option.ridership|default_if_none:"-"|intcomma }}</td>
               </tr>
 
 

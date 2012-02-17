@@ -106,6 +106,15 @@ hr.soften {
   margin-top: 9px;
 }
 
+/* Option group popover link */
+a.optiongroup {
+  color: #333333;
+}
+a.optiongroup:hover {
+  text-decoration: none;
+  cursor: pointer;
+}
+
 /* Fields for variables */
 .budget-builder input[type=text] {
   margin-bottom: 9px;
