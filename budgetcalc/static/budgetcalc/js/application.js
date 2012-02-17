@@ -28,11 +28,7 @@ jQuery(document).ready(function($) {
 
     // form utils
     // popovers
-    $(".budget-builder .input label")
-    .popover({
-        placement: "top"
-    })
-    $(".budget-builder .optiongroup")
+    $(".budget-builder .input label, .budget-builder .optiongroup")
     .popover()
     $(".budget-builder .clear")
     .popover()
@@ -89,7 +85,7 @@ jQuery(document).ready(function($) {
             budget,
             function (data) {
                 // some result stats
-                $(".page-header .lead").html(data["budget__count"] + " users worked on the <b>MBTA budget gap</b> and filled it by an average of <span class='budget-filled'>$ " + addCommas(parseInt(data["budget__avg"])) + "</span>.<br>See the total number of selections per option below.");
+                $(".page-header .lead").html(data["budget__count"] + " users worked on the MBTA budget gap and filled it by an average of <span class='budget-filled'>$ " + addCommas(parseInt(data["budget__avg"])) + "</span>.<br>See the total number of selections per option below.");
                 $.each(data["options"], function(option, nr) {
                     if ($("#option_nr_" + option).length === 0) {
                         $("#option_" + option).parent().prepend("<span id='option_nr_" + option + "' class='label label-info'>&times; " + nr + "</span>");
@@ -107,6 +103,7 @@ jQuery(document).ready(function($) {
                     // twitter widget not available
                     $(".twitterwidget").remove();
                 }
+                $(".email-link .btn").attr("href","mailto:?subject=MBTA Budget Calculator&body=I worked on the MBTA Budget and filled it by $ " + addCommas(budget['filled']) + " - Try yourself at http://fixthet.mapc.org");
                 $("html, body").animate({scrollTop:0}, "slow");
             }, 
             "json"

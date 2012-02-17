@@ -62,7 +62,7 @@ a {
 
 .navbar h1 {
   text-transform: uppercase;
-  font-size: 28px;
+  font-size: 24px;
   font-weight: 500;
   line-height: 28px;
   color: #df8100;
@@ -72,7 +72,7 @@ a {
 .navbar small {
   color: #666;
   font-weight: 400;
-  font-size: 24px;
+  font-size: 20px;
   line-height: 24px;
   letter-spacing: 0.02em;
 }
@@ -84,9 +84,6 @@ a {
 
 /* Space out sub-sections more
 -------------------------------------------------- */
-section {
-  padding-top: 20px;
-}
 
 /* Faded out hr */
 hr.soften {
@@ -105,6 +102,9 @@ hr.soften {
 .page-header {
   position: relative;
   padding-top: 200px;
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+  border-bottom: none;
 }
 .page-header h1 {
   margin-bottom: 9px;
@@ -113,12 +113,24 @@ hr.soften {
   line-height: 1;
 }
 .page-header p {
+  margin-top: 10px;
   margin-bottom: 10px;
   font-weight: 300;
 }
 
 .social-media {
   margin-top: 10px;
+  text-align: center;
+}
+
+.social-media li {
+  display: inline;
+  margin-right: 20px;
+}
+
+.email-link {
+  font-weight: bold;
+  vertical-align: top;
 }
 
 
