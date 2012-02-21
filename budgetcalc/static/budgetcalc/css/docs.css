@@ -62,8 +62,8 @@ a {
 
 .navbar h1 {
   text-transform: uppercase;
-  font-size: 24px;
-  font-weight: 500;
+  font-size: 26px;
+  font-weight: 700;
   line-height: 28px;
   color: #df8100;
   margin-top: 6px;
@@ -71,8 +71,8 @@ a {
 
 .navbar small {
   color: #666;
-  font-weight: 400;
-  font-size: 20px;
+  font-weight: 700;
+  font-size: 22px;
   line-height: 24px;
   letter-spacing: 0.02em;
 }
