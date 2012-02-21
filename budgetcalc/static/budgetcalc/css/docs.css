@@ -118,21 +118,9 @@ hr.soften {
   font-weight: 300;
 }
 
-.social-media {
-  margin-top: 10px;
-  text-align: center;
+.lead {
+  font-size: 18px;
 }
-
-.social-media li {
-  display: inline;
-  margin-right: 20px;
-}
-
-.email-link {
-  font-weight: bold;
-  vertical-align: top;
-}
-
 
 /* Budget options
 -------------------------------------------------- */
@@ -143,16 +131,29 @@ hr.soften {
 
 .category-header h1 {
   color: #044388;
+  font-size: 24px;
 }
 
 .category-header h1 small {
   margin-left: 10px;
 }
 
+.category-header.budget-type {
+  font-size: 18px;
+  color: #999999;
+  line-height: 36px;
+  text-align: center;
+}
+
 /* Space out h3s when following a section */
 .budget-builder input + h3,
 .budget-builder .checkbox + h3 {
   margin-top: 9px;
+}
+
+.budget h3 {
+  font-size: 18px;
+  line-height: 20px;
 }
 
 /* Option group popover link */
@@ -267,6 +268,24 @@ label {
   margin-bottom: 0px;
 }
 
+.details {
+  margin-left: 8px;
+  font-size: 13px;
+  font-weight: bold;
+  line-height: 18px;
+  color: #000000;
+  text-shadow: 0 1px 0 #ffffff;
+  opacity: 0.2;
+  filter: alpha(opacity=20);
+}
+.details:hover {
+  color: #000000;
+  text-decoration: none;
+  opacity: 0.4;
+  filter: alpha(opacity=40);
+  cursor: pointer;
+}
+
 /* More Bootstrap
 -------------------------------------------------- */
 
@@ -299,8 +318,28 @@ label {
 
 .footer p {
   margin-bottom: 0;
+  margin-top: 10px;
   color: #555;
+  float: left;
 }
+
+/* Share buttons
+-------------------------------------------------- */
+
+.social-media {
+  margin-top: 10px;
+}
+
+.social-media li {
+  float: left;
+  display: block;
+}
+
+.social-media .email-link {
+  font-weight: bold;
+  margin-right: 40px;
+}
+
 
 /* Responsive design
 -------------------------------------------------- */

@@ -28,7 +28,7 @@ jQuery(document).ready(function($) {
 
     // form utils
     // popovers
-    $(".budget-builder .input label, .budget-builder .optiongroup")
+    $(".budget-builder .details")
     .popover()
     $(".budget-builder .clear")
     .popover()
@@ -85,7 +85,7 @@ jQuery(document).ready(function($) {
             budget,
             function (data) {
                 // some result stats
-                $(".page-header .lead").html(data["budget__count"] + " users worked on the MBTA budget gap and filled it by an average of <span class='budget-filled'>$ " + addCommas(parseInt(data["budget__avg"])) + "</span>.<br>See the total number of selections per option below.");
+                $(".page-header .lead").html("You are one of " + data["budget__count"] + " users to come up with your own plan to fix the T's budget. Budget proposals so far have had an average combined revenue and savings of <span class='budget-filled'>$ " + addCommas(parseInt(data["budget__avg"])) + "</span>.<br>See how many people chose each option below.");
                 $.each(data["options"], function(option, nr) {
                     if ($("#option_nr_" + option).length === 0) {
                         $("#option_" + option).parent().prepend("<span id='option_nr_" + option + "' class='label label-info'>&times; " + nr + "</span>");
@@ -94,9 +94,11 @@ jQuery(document).ready(function($) {
                     }
                 });
                 $(".alert").hide("slow");
+                $(".social-media").appendTo("header.page-header");
+                
                 try {
                     $(".twitter-share-button").remove();
-                    $(".twitterwidget").prepend("<a href='https://twitter.com/share' class='twitter-share-button' data-text='I worked on the MBTA Budget and filled it by $ " + addCommas(budget['filled']) + "!' data-size='large' data-via='MAPCMetroBoston'>Tweet</a>");
+                    $(".twitterwidget").prepend("<a href='https://twitter.com/share' class='twitter-share-button' data-text='I worked on the MBTA Budget and filled it by $ " + addCommas(budget['filled']) + "!' data-via='MAPCMetroBoston'>Tweet</a>");
                     // re-evaluate twitter widget
                     twttr.widgets.load();
                 } catch (e) {

@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-  
+
     <meta charset="utf-8">
     <title>MBTA Budget Calculator</title>
     <meta name="description" content="MBTA Budget Calculator">
@@ -77,18 +77,7 @@
       <header class="page-header">
         <div class="row">
           <div class="span8">
-            <ul class="unstyled social-media">
-              <li class="twitterwidget"><a href="https://twitter.com/share" class="twitter-share-button" data-text="I'm working on the MBTA budget!" data-size="large" data-via="MAPCMetroBoston">Tweet</a>
-                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script></li>
-              <li> <div class="fb-like" data-href="http://mbta.mapc.org/budgetcalculator/" data-send="false" data-width="200" data-show-faces="true"></div></li>
-              <li><g:plusone annotation="inline" width="200"></g:plusone></li>
-              <li class="email-link"><a class="btn" href="mailto:?subject=MBTA Budget Calculator&body=I filled the MBTA Budget Gap at: http://fixthet.mapc.org"><i class="icon-envelope"></i> Email</a></li>
-            </ul>
-          </div> 
-        </div>
-        <div class="row">
-          <div class="span8">
-            <p class="lead">Please use the options below to fill the $ 161 million MBTA budget gap with revenues and savings.</p>
+            <p class="lead">The MBTA is facing a $ 161 million gap in its budget for fiscal year 2013, which begins on July 1st. The T has proposed two different packages of fare increases and service cuts (Scenario 1 and Scenario 2), both of which have received strong public opposition. Help the MBTA figure out a better way to fix next year's budget by choosing what you think are the best options for raising revenue and cutting costs. Learn more about how the T got into this mess, and see their <a href="/info/MBTA_Fare_and_Service_Changes.pdf" title="MBTA Fare and Service Changes">proposals to fill the gap</a>.</p>
           </div>
         </div>
       </header>
@@ -112,7 +101,9 @@
             <tbody>
           {% for category in category_list %}
               <tr>
-                <td colspan="3" class="category-header"><h1>{{ category.grouper }}<small>{% if category.grouper.cat_type == 'r' %}Revenue{% else %}Savings{% endif %}</small></h1></td>
+                <td class="category-header"><h1>{{ category.grouper }}</h1></td>
+                <td class="category-header budget-type">{% if category.grouper.cat_type == 'r' %}Revenue{% else %}Savings{% endif %}</td>
+                <td></td>
               </tr>
           {% regroup category.list by optiongroup as optiongroup_list %}
           {% for optiongroup in optiongroup_list %}
@@ -124,7 +115,7 @@
               {% for option in optiongroup.list %}  
                    
               <tr class="input">
-                <td><label class="radio"{% if option.desc %} title="Details" data-content="{{ option.desc }}"{% endif %}><input class="budget-change" type="radio" value="{{ option.amount }}" name="{{ optiongroup.grouper|slugify }}" id="option_{{ option.id }}">{{ option.title }}</label></td>
+                <td><label class="radio"><input class="budget-change" type="radio" value="{{ option.amount }}" name="{{ optiongroup.grouper|slugify }}" id="option_{{ option.id }}">{{ option.title }}{% if option.desc %}<a class="details" title="Details" data-content="{{ option.desc }}">more...</a>{% endif %}</label></td>
                 <td class="impact">$ {{ option.amount|intword }}</td>
                 <td class="impact">{{ option.ridership|default_if_none:"-"|intcomma }}</td>
               </tr>
@@ -134,11 +125,10 @@
               {% for option in optiongroup.list %}
 
               <tr class="input">
-                <td><label class="checkbox"{% if option.desc %} title="Details" data-content="{{ option.desc }}"{% endif %}><input class="budget-change" type="checkbox" value="{{ option.amount }}" id="option_{{ option.id }}">{{ option.title }}</label></td>
+                <td><label class="checkbox"{% if option.desc %} title="Details" data-content="{{ option.desc }}"{% endif %}><input class="budget-change" type="checkbox" value="{{ option.amount }}" id="option_{{ option.id }}">{{ option.title }}{% if option.desc %}<a class="details" title="Details" data-content="{{ option.desc }}">more...</a>{% endif %}</label></td>
                 <td class="impact">$ {{ option.amount|intword }}</td>
                 <td class="impact">{{ option.ridership|default_if_none:"-"|intcomma }}</td>
               </tr>
-
 
               {% endfor %}
               {% endif %}
@@ -154,45 +144,59 @@
       </section>
 
       <section>
-      <div class="row">
-        <div class="span8">
-          <div id="error-nobudget" class="alert alert-block alert-error fade in">
-            <a class="close" href="#">&times;</a>
-            <h4 class="alert-heading">Error: Empty budget.</h4>
-            <p>Please adjust your budget before you submit your proposal.</p>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="span8">
-          <div id="error-noemail" class="alert alert-block alert-error fade in">
-            <a class="close" href="#">&times;</a>
-            <h4 class="alert-heading">Error: Email is not valid.</h4>
-            <p>Please enter a valid email address. We won't share your personal information. Unique email addresses help us to improve our results.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="span8">
-          <form id="budget-form" action="{% url budgetcalc-index %}">
-            <div class="form-actions">
-              <p class="lead">Submit your budget proposal and see aggregated results from other users.</p>
-              {% csrf_token %}
-              <div class="input-prepend">
-                <span class="add-on"><i class="icon-envelope"></i></span>
-                <input type="text" class="input-xlarge" placeholder="Your Email (required) ..." id="email"></div>
-              <div>
-              <button id="budget-btn" class="btn btn-large btn-primary" href="#">Submit</button></div>
+        <div class="row">
+          <div class="span8">
+            <div id="error-nobudget" class="alert alert-block alert-error fade in">
+              <a class="close" href="#">&times;</a>
+              <h4 class="alert-heading">Error: Empty budget.</h4>
+              <p>Please adjust your budget before you submit your proposal.</p>
             </div>
-          </form>
+          </div>
         </div>
-      </div>
+        <div class="row">
+          <div class="span8">
+            <div id="error-noemail" class="alert alert-block alert-error fade in">
+              <a class="close" href="#">&times;</a>
+              <h4 class="alert-heading">Error: Email is not valid.</h4>
+              <p>Please enter a valid email address. We won't share your personal information. Unique email addresses help us to improve our results.</p>
+            </div>
+          </div>
+        </div>
 
+        <div class="row">
+          <div class="span8">
+            <form id="budget-form" action="{% url budgetcalc-index %}">
+              <div class="form-actions">
+                <p class="lead">Submit your budget proposal and see aggregated results from other users.</p>
+                {% csrf_token %}
+                <div class="input-prepend">
+                  <span class="add-on"><i class="icon-envelope"></i></span>
+                  <input type="text" class="input-xlarge" placeholder="Your Email (required) ..." id="email"></div>
+                <div>
+                <button id="budget-btn" class="btn btn-large btn-primary" href="#">Submit</button></div>
+              </div>
+            </form>
+          </div>
+        </div>
       </section>
 
       <footer class="footer">
-        <p>&copy; 2012 <a href="http://mapc.org" title="Metropolitan Area Planning Council">MAPC</a></p>
+        <div class="row social-media">
+          <div class="span12">
+            <ul class="unstyled">
+              <li class="email-link"><a class="btn btn-mini" href="mailto:?subject=MBTA Budget Calculator&body=I filled the MBTA Budget Gap at: http://fixthet.mapc.org"><i class="icon-envelope"></i> Email</a></li>
+              <li class="twitterwidget"><a href="https://twitter.com/share" class="twitter-share-button" data-text="I'm working on the MBTA budget!" data-via="MAPCMetroBoston">Tweet</a>
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script></li>              
+              <li><g:plusone size="medium"></g:plusone></li>
+              <li><div class="fb-like" data-send="false" data-layout="button_count" data-show-faces="false"></div></li>
+            </ul>
+          </div>
+        </div> 
+        <div class="row">
+          <div class="span12">
+            <p>&copy; 2012 <a href="http://mapc.org" title="Metropolitan Area Planning Council">MAPC</a></p> 
+          </div>
+        </div>  
       </footer>
 
     </div> <!-- /container -->
