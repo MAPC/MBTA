@@ -3,7 +3,6 @@ jQuery(document).ready(function($) {
     var budget = {};
 
     // utils
-
     // simple validations
     $(".alert").hide();
     $(".alert .close").on('click', function (e) {
@@ -14,7 +13,6 @@ jQuery(document).ready(function($) {
         var regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
         return regex.test(email);
     }
-
     // taken from http://www.mredkj.com/javascript/numberFormat.html#addcommas
     var addCommas = function (nStr) {
         nStr += '';
@@ -28,13 +26,12 @@ jQuery(document).ready(function($) {
         return x1 + x2;
     }
 
-
     // form utils
+    // popovers
+    $(".budget-builder .input label, .budget-builder .optiongroup")
+    .popover()
     $(".budget-builder .clear")
-    .popover({
-        title: "Clear this options",
-        content: "Removes your selections from this section"
-    })
+    .popover()
     .on("click", function () {
         var optionGroup = $(this).attr("name");
         $("input[name='" + optionGroup + "']").prop("checked", false);
@@ -45,7 +42,7 @@ jQuery(document).ready(function($) {
         updateBudget();
     });  
 
-    // update budget figures
+    // update budget tally
     var updateBudget = function () {
         budget = {
             "options" : [],
@@ -88,8 +85,7 @@ jQuery(document).ready(function($) {
             budget,
             function (data) {
                 // some result stats
-                $("header.page-header").empty();
-                $("header.page-header").append("<p class='lead'>" + data["budget__count"] + " users worked on the <b>MBTA budget gap</b> and filled it by an average of <span class='budget-filled'>$ " + addCommas(parseInt(data["budget__avg"])) + "</span>.</p><p class='lead'>See the total number of selections per option below.</p>");
+                $(".page-header .lead").html(data["budget__count"] + " users worked on the MBTA budget gap and filled it by an average of <span class='budget-filled'>$ " + addCommas(parseInt(data["budget__avg"])) + "</span>.<br>See the total number of selections per option below.");
                 $.each(data["options"], function(option, nr) {
                     if ($("#option_nr_" + option).length === 0) {
                         $("#option_" + option).parent().prepend("<span id='option_nr_" + option + "' class='label label-info'>&times; " + nr + "</span>");
@@ -97,13 +93,21 @@ jQuery(document).ready(function($) {
                         $("#option_nr_" + option).html("&times; " + nr);
                     }
                 });
-                $('html, body').animate({scrollTop:0}, 'slow');
                 $(".alert").hide("slow");
+                try {
+                    $(".twitter-share-button").remove();
+                    $(".twitterwidget").prepend("<a href='https://twitter.com/share' class='twitter-share-button' data-text='I worked on the MBTA Budget and filled it by $ " + addCommas(budget['filled']) + "!' data-size='large' data-via='MAPCMetroBoston'>Tweet</a>");
+                    // re-evaluate twitter widget
+                    twttr.widgets.load();
+                } catch (e) {
+                    // twitter widget not available
+                    $(".twitterwidget").remove();
+                }
+                $(".email-link .btn").attr("href","mailto:?subject=MBTA Budget Calculator&body=I worked on the MBTA Budget and filled it by $ " + addCommas(budget['filled']) + " - Try yourself at http://fixthet.mapc.org");
+                $("html, body").animate({scrollTop:0}, "slow");
             }, 
             "json"
         );
     });
-
-
 
 });

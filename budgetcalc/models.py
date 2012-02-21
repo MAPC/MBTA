@@ -28,6 +28,7 @@ class Optiongroup(models.Model):
     """
 
     title = models.CharField(max_length=200)
+    desc = models.TextField('Short description', null=True, blank=True)
 
     class Meta:
         verbose_name = _('Optiongroup')

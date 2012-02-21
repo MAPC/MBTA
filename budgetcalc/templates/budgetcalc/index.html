@@ -3,9 +3,10 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+  
     <meta charset="utf-8">
-    <title>MAPC's MBTA Budget Calculator</title>
-    <meta name="description" content="MAPC's MBTA Budget Calculator">
+    <title>MBTA Budget Calculator</title>
+    <meta name="description" content="MBTA Budget Calculator">
     <meta name="author" content="MAPC">
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
@@ -22,20 +23,50 @@
     <link rel="apple-touch-icon" href="{{ STATIC_URL }}img/apple-touch-icon.png">
     <link rel="apple-touch-icon" sizes="72x72" href="{{ STATIC_URL }}img/apple-touch-icon-72x72.png">
     <link rel="apple-touch-icon" sizes="114x114" href="{{ STATIC_URL }}img/apple-touch-icon-114x114.png">
+
+    <!-- Google +1 -->
+    <script type="text/javascript">
+      (function() {
+        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+        po.src = 'https://apis.google.com/js/plusone.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+      })();
+    </script>
+
   </head>
 
   <body>
+    
+    <!-- Facebook -->
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=176500002460132";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
     
     <div class="navbar navbar-fixed-top">
       <div class="mapc-masthead"><div class="container"><img src="{{ STATIC_URL }}budgetcalc/img/mapc-logo.png" alt="Metropolitan Area Planning Council" width="124" height="64" /><img id="mapc-tagline" src="{{ STATIC_URL }}budgetcalc/img/mapc-tagline.png" alt="Metropolitan Area Planning Council" width="475" height="54" /><img src="{{ STATIC_URL }}budgetcalc/img/nu-policy-logo.png" alt="Northeastern University" width="226" height="59" /></div></div>
       <div class="tally">
         <div class="container">
           <div class="row">
-            <div class="span8">MBTA Budget Calculator: How Would You Fix the T's Budget?</div>
-          </div>
-          <div class="row">
-            <div class="span4 figure">Budget Deficit: <span class="budget-gap">$ 161,000,000</span></div>
-            <div class="span4 figure">You've filled: <span class="budget-filled"></span></div>
+            <div class="span8">
+              <div class="row">
+                <div class="span8">
+                  <h1>MBTA Budget Calculator:</h1> 
+                  <small>How Would You Fix the T's Budget?</small>
+                </div>
+              </div>
+              <div class="row">
+                <div class="span4 figure">Budget Deficit: <span class="budget-gap">$ 161,000,000</span></div>
+                <div class="span4 figure">You've filled: <span class="budget-filled">$ 0</span></div>
+              </div>
+            </div>
+            <div class="span4 tpic">
+              <img src="{{ STATIC_URL }}budgetcalc/img/t.png" alt="T" />
+            </div>
           </div>
         </div>
       </div>
@@ -43,12 +74,24 @@
 
     <div class="container">
 
-      <div class="row">
-         <header class="page-header span8">
-           <p class="lead">Please use the options below to fill the <b>$ 161 million MBTA budget gap</b> with revenues and savings.</p>
-         </header>
-      </div>
-      
+      <header class="page-header">
+        <div class="row">
+          <div class="span8">
+            <ul class="unstyled social-media">
+              <li class="twitterwidget"><a href="https://twitter.com/share" class="twitter-share-button" data-text="I'm working on the MBTA budget!" data-size="large" data-via="MAPCMetroBoston">Tweet</a>
+                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script></li>
+              <li> <div class="fb-like" data-href="http://mbta.mapc.org/budgetcalculator/" data-send="false" data-width="200" data-show-faces="true"></div></li>
+              <li><g:plusone annotation="inline" width="200"></g:plusone></li>
+              <li class="email-link"><a class="btn" href="mailto:?subject=MBTA Budget Calculator&body=I filled the MBTA Budget Gap at: http://fixthet.mapc.org"><i class="icon-envelope"></i> Email</a></li>
+            </ul>
+          </div> 
+        </div>
+        <div class="row">
+          <div class="span8">
+            <p class="lead">Please use the options below to fill the $ 161 million MBTA budget gap with revenues and savings.</p>
+          </div>
+        </div>
+      </header>
 
       {% regroup options by category as category_list %}
 
@@ -74,16 +117,16 @@
           {% regroup category.list by optiongroup as optiongroup_list %}
           {% for optiongroup in optiongroup_list %}
               <tr>
-                <td colspan="3"><h3>{{ optiongroup.grouper }}{% if optiongroup.grouper.id != 1 %}<a class="clear" name="{{ optiongroup.grouper|slugify }}">&times;</a>{% endif %}</h3></td>
+                <td colspan="3"><h3>{% if optiongroup.grouper.desc %}<a class="optiongroup" title="Details" data-content="{{ optiongroup.grouper.desc }}">{% endif %}{{ optiongroup.grouper }}{% if optiongroup.grouper.desc %}</a>{% endif %}{% if optiongroup.grouper.id != 1 %}<a class="clear" name="{{ optiongroup.grouper|slugify }}" title="Clear" data-content="Removes your selections from {{ optiongroup.grouper }}">&times;</a>{% endif %}</h3></td>
               </tr>
 
               {% if optiongroup.grouper.id != 1 %}
               {% for option in optiongroup.list %}  
                    
               <tr class="input">
-                <td><label class="radio"><input class="budget-change" type="radio" value="{{ option.amount }}" name="{{ optiongroup.grouper|slugify }}" id="option_{{ option.id }}">{{ option.title }}</label></td>
+                <td><label class="radio"{% if option.desc %} title="Details" data-content="{{ option.desc }}"{% endif %}><input class="budget-change" type="radio" value="{{ option.amount }}" name="{{ optiongroup.grouper|slugify }}" id="option_{{ option.id }}">{{ option.title }}</label></td>
                 <td class="impact">$ {{ option.amount|intword }}</td>
-                <td class="impact">0</td>
+                <td class="impact">{{ option.ridership|default_if_none:"-"|intcomma }}</td>
               </tr>
 
               {% endfor %}
@@ -91,9 +134,9 @@
               {% for option in optiongroup.list %}
 
               <tr class="input">
-                <td><label class="checkbox"><input class="budget-change" type="checkbox" value="{{ option.amount }}" id="option_{{ option.id }}">{{ option.title }}</label></td>
+                <td><label class="checkbox"{% if option.desc %} title="Details" data-content="{{ option.desc }}"{% endif %}><input class="budget-change" type="checkbox" value="{{ option.amount }}" id="option_{{ option.id }}">{{ option.title }}</label></td>
                 <td class="impact">$ {{ option.amount|intword }}</td>
-                <td class="impact">0</td>
+                <td class="impact">{{ option.ridership|default_if_none:"-"|intcomma }}</td>
               </tr>
 
 
@@ -101,9 +144,6 @@
               {% endif %}
           {% endfor %}
           {% endfor %}
-
-              
-            
 
             </tbody>
           </table>
