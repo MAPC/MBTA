@@ -77,7 +77,7 @@
       <header class="page-header">
         <div class="row">
           <div class="span8">
-            <p class="lead">The MBTA is facing a $ 161 million gap in its budget for fiscal year 2013, which begins on July 1st. The T has proposed two different packages of fare increases and service cuts (Scenario 1 and Scenario 2), both of which have received strong public opposition. Help the MBTA figure out a better way to fix next year's budget by choosing what you think are the best options for raising revenue and cutting costs. Learn more about how the T got into this mess, and see their <a href="/info/MBTA_Fare_and_Service_Changes.pdf" title="MBTA Fare and Service Changes">proposals to fill the gap</a>.</p>
+            <p class="lead">The MBTA is facing a $161 million gap in its budget for fiscal year 2013, which begins on July 1st. The T has proposed two different packages of fare increases and service cuts (Scenario 1 and Scenario 2), both of which have received strong public opposition. Help the MBTA figure out a better way to fix next year's budget by choosing what you think are the best options for raising revenue and cutting costs. <a href="/info/MBTA_Fare_and_Service_Changes.pdf" title="MBTA Fare and Service Changes">Click to learn more about how the T got into this mess, and see their proposals to fill the gap</a>.</p>
           </div>
         </div>
       </header>
@@ -107,16 +107,18 @@
               </tr>
           {% regroup category.list by optiongroup as optiongroup_list %}
           {% for optiongroup in optiongroup_list %}
+              {% if optiongroup.grouper %}
               <tr>
-                <td colspan="3"><h3>{% if optiongroup.grouper.desc %}<a class="optiongroup" title="Details" data-content="{{ optiongroup.grouper.desc }}">{% endif %}{{ optiongroup.grouper }}{% if optiongroup.grouper.desc %}</a>{% endif %}{% if optiongroup.grouper.id != 1 %}<a class="clear" name="{{ optiongroup.grouper|slugify }}" title="Clear" data-content="Removes your selections from {{ optiongroup.grouper }}">&times;</a>{% endif %}</h3></td>
+                <td colspan="3"><h3>{{ optiongroup.grouper }}{% if optiongroup.grouper.form_type = 'r' %}<a class="clear" name="{{ optiongroup.grouper|slugify }}" title="Clear" data-content="Removes your selections from {{ optiongroup.grouper }}">&times;</a>{% endif %}{% if optiongroup.grouper.desc %}<a class="details" title="Details" data-content="{{ optiongroup.grouper.desc|safe }}">more...</a>{% endif %}</h3></td>
               </tr>
+              {% endif %}
 
               {% if optiongroup.grouper.form_type = 'r' %}
               {% for option in optiongroup.list %}  
                    
               <tr class="input">
-                <td><label class="radio"><input class="budget-change" type="radio" value="{{ option.amount }}" name="{{ optiongroup.grouper|slugify }}" id="option_{{ option.id }}">{{ option.title }}{% if option.desc %}<a class="details" title="Details" data-content="{{ option.desc }}">more...</a>{% endif %}</label></td>
-                <td class="impact">$ {{ option.amount|intword }}</td>
+                <td><label class="radio"><input class="budget-change" type="radio" value="{{ option.amount }}" name="{{ optiongroup.grouper|slugify }}" id="option_{{ option.id }}">{{ option.title }}{% if option.desc %}<a class="details" title="Details" data-content="{{ option.desc|safe }}">more...</a>{% endif %}</label></td>
+                <td class="impact">${{ option.amount|intword }}</td>
                 <td class="impact">{{ option.ridership|default_if_none:"-"|intcomma }}</td>
               </tr>
 
@@ -125,8 +127,8 @@
               {% for option in optiongroup.list %}
 
               <tr class="input">
-                <td><label class="checkbox"{% if option.desc %} title="Details" data-content="{{ option.desc }}"{% endif %}><input class="budget-change" type="checkbox" value="{{ option.amount }}" id="option_{{ option.id }}">{{ option.title }}{% if option.desc %}<a class="details" title="Details" data-content="{{ option.desc }}">more...</a>{% endif %}</label></td>
-                <td class="impact">$ {{ option.amount|intword }}</td>
+                <td><label class="checkbox"{% if option.desc %} title="Details" data-content="{{ option.desc }}"{% endif %}><input class="budget-change" type="checkbox" value="{{ option.amount }}" id="option_{{ option.id }}">{{ option.title }}{% if option.desc|safe %}<a class="details" title="Details" data-content="{{ option.desc }}">more...</a>{% endif %}</label></td>
+                <td class="impact">${{ option.amount|intword }}</td>
                 <td class="impact">{{ option.ridership|default_if_none:"-"|intcomma }}</td>
               </tr>
 
@@ -177,26 +179,25 @@
               </div>
             </form>
           </div>
-        </div>
+        </div>        
       </section>
 
-      <footer class="footer">
+      <section>
         <div class="row social-media">
           <div class="span12">
             <ul class="unstyled">
               <li class="email-link"><a class="btn btn-mini" href="mailto:?subject=MBTA Budget Calculator&body=I filled the MBTA Budget Gap at: http://fixthet.mapc.org"><i class="icon-envelope"></i> Email</a></li>
-              <li class="twitterwidget"><a href="https://twitter.com/share" class="twitter-share-button" data-text="I'm working on the MBTA budget!" data-via="MAPCMetroBoston">Tweet</a>
-    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script></li>              
+              <li class="twitterwidget"><a href="https://twitter.com/share" class="twitter-share-button" data-url="http://fixthet.mapc.org/" data-text="I'm working on the MBTA budget!" data-via="MAPCMetroBoston">Tweet</a>
+                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script></li>             
               <li><g:plusone size="medium"></g:plusone></li>
               <li><div class="fb-like" data-send="false" data-layout="button_count" data-show-faces="false"></div></li>
             </ul>
           </div>
         </div> 
-        <div class="row">
-          <div class="span12">
-            <p>&copy; 2012 <a href="http://mapc.org" title="Metropolitan Area Planning Council">MAPC</a></p> 
-          </div>
-        </div>  
+      </section>
+
+      <footer class="footer">
+        <p>&copy; 2012 <a href="http://mapc.org" title="Metropolitan Area Planning Council">MAPC</a></p> 
       </footer>
 
     </div> <!-- /container -->

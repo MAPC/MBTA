@@ -95,10 +95,10 @@ jQuery(document).ready(function($) {
                 });
                 $(".alert").hide("slow");
                 $(".social-media").appendTo("header.page-header");
-                
+
                 try {
                     $(".twitter-share-button").remove();
-                    $(".twitterwidget").prepend("<a href='https://twitter.com/share' class='twitter-share-button' data-text='I came up with my own plan to fix the MBTA Budget and filled the gap by $ " + addCommas(budget['filled']) + "!' data-via='MAPCMetroBoston'>Tweet</a>");
+                    $(".twitterwidget").prepend("<a href='https://twitter.com/share' class='twitter-share-button' data-url='http://fixthet.mapc.org/' data-text='I came up with my own plan to fix the MBTA Budget and filled the gap by $ " + addCommas(budget['filled']) + "!' data-via='MAPCMetroBoston'>Tweet</a>");
                     // re-evaluate twitter widget
                     twttr.widgets.load();
                 } catch (e) {
