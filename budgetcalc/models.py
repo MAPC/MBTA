@@ -8,6 +8,11 @@ CATEGORY_TYPES = (
     ('s', 'Savings'),
 )
 
+FORM_TYPES = (
+    ('r', 'Radio Button'),
+    ('c', 'Checkbox'),
+)
+
 class Category(models.Model):
     title = models.CharField(max_length=100)
     cat_type = models.CharField('Type', max_length=1, choices=CATEGORY_TYPES, default='r')
@@ -29,6 +34,7 @@ class Optiongroup(models.Model):
 
     title = models.CharField(max_length=200)
     desc = models.TextField('Short description', null=True, blank=True)
+    form_type = models.CharField('Form type', max_length=1, default='r', choices=FORM_TYPES)
 
     class Meta:
         verbose_name = _('Optiongroup')

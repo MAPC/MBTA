@@ -111,7 +111,7 @@
                 <td colspan="3"><h3>{% if optiongroup.grouper.desc %}<a class="optiongroup" title="Details" data-content="{{ optiongroup.grouper.desc }}">{% endif %}{{ optiongroup.grouper }}{% if optiongroup.grouper.desc %}</a>{% endif %}{% if optiongroup.grouper.id != 1 %}<a class="clear" name="{{ optiongroup.grouper|slugify }}" title="Clear" data-content="Removes your selections from {{ optiongroup.grouper }}">&times;</a>{% endif %}</h3></td>
               </tr>
 
-              {% if optiongroup.grouper.id != 1 %}
+              {% if optiongroup.grouper.form_type = 'r' %}
               {% for option in optiongroup.list %}  
                    
               <tr class="input">

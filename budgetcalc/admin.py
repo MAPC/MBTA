@@ -9,8 +9,8 @@ class CategoryAdmin(admin.ModelAdmin):
 
 
 class OptiongroupAdmin(admin.ModelAdmin):
-    list_display = ('pk', 'title',)
-    list_editable = ('title',)
+    list_display = ('pk', 'title', 'form_type',)
+    list_editable = ('title', 'form_type',)
 
 
 class OptionAdmin(admin.ModelAdmin):
