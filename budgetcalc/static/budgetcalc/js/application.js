@@ -98,14 +98,14 @@ jQuery(document).ready(function($) {
                 
                 try {
                     $(".twitter-share-button").remove();
-                    $(".twitterwidget").prepend("<a href='https://twitter.com/share' class='twitter-share-button' data-text='I worked on the MBTA Budget and filled it by $ " + addCommas(budget['filled']) + "!' data-via='MAPCMetroBoston'>Tweet</a>");
+                    $(".twitterwidget").prepend("<a href='https://twitter.com/share' class='twitter-share-button' data-text='I came up with my own plan to fix the MBTA Budget and filled the gap by $ " + addCommas(budget['filled']) + "!' data-via='MAPCMetroBoston'>Tweet</a>");
                     // re-evaluate twitter widget
                     twttr.widgets.load();
                 } catch (e) {
                     // twitter widget not available
                     $(".twitterwidget").remove();
                 }
-                $(".email-link .btn").attr("href","mailto:?subject=MBTA Budget Calculator&body=I worked on the MBTA Budget and filled it by $ " + addCommas(budget['filled']) + " - Try yourself at http://fixthet.mapc.org");
+                $(".email-link .btn").attr("href","mailto:?subject=MBTA Budget Calculator&body=I came up with my own plan to fix the MBTA Budget and filled the gap by $ " + addCommas(budget['filled']) + ". Try yourself at http://fixthet.mapc.org");
                 $("html, body").animate({scrollTop:0}, "slow");
             }, 
             "json"
