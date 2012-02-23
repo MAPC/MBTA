@@ -57,6 +57,8 @@ class Option(models.Model):
     optiongroup = models.ForeignKey(Optiongroup, null=True, blank=True, default=1)
     order = models.IntegerField(default=1)
 
+    parent = models.ForeignKey('self', null=True, blank=True)
+
     class Meta:
         verbose_name = _('Option')
         verbose_name_plural = _('Options')
