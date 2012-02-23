@@ -40,27 +40,30 @@ jQuery(document).ready(function($) {
         updateBudget();
     });
     $(".budget-change").on("change", function() {
-        // child or parent?
-        var optionParent = $(this).attr("data-parent");
-        if (optionParent) {
-            var optionGroup = $(this).attr("data-optiongroup"); 
-            var optionId = $(this).attr("data-parent"); 
-        } else {
-            var optionGroup = $(this).attr("name");
-            var optionId = $(this).attr("id");
-        }
-        // deselect all checked options in that optiongroup
-        $("input[name='" + optionGroup + "']").prop("checked", false);
-        $("input[data-optiongroup='" + optionGroup + "']").prop("checked", false);
-        // hide all child options in that optiongroup
-        $("input[data-optiongroup='" + optionGroup + "']").parentsUntil("tbody").hide();
-        // select option and show all related child options
-        $("input[name='" + optionId + "-child']").parentsUntil("tbody").show();
-        $("input[name='" + optionId + "-child']").first().prop("checked", true);   
-        // select clicked option
-        $(this).prop("checked", true);
-        // select parent option
-        if (optionParent) $("#" + optionParent).prop("checked", true);   
+        // parent/child options
+        if ($(this).attr("type") === "radio") {
+            // child or parent?
+            var optionParent = $(this).attr("data-parent");
+            if (optionParent) {
+                var optionGroup = $(this).attr("data-optiongroup"); 
+                var optionId = $(this).attr("data-parent"); 
+            } else {
+                var optionGroup = $(this).attr("name");
+                var optionId = $(this).attr("id");
+            }
+            // deselect all checked options in that optiongroup
+            $("input[name='" + optionGroup + "']").prop("checked", false);
+            $("input[data-optiongroup='" + optionGroup + "']").prop("checked", false);
+            // hide all child options in that optiongroup
+            $("input[data-optiongroup='" + optionGroup + "']").parentsUntil("tbody").hide();
+            // select option and show all related child options
+            $("input[name='" + optionId + "-child']").parentsUntil("tbody").show();
+            $("input[name='" + optionId + "-child']").first().prop("checked", true);   
+            // select clicked option
+            $(this).prop("checked", true);
+            // select parent option
+            if (optionParent) $("#" + optionParent).prop("checked", true); 
+        }  
         // recalculate
         updateBudget();
     }); 
