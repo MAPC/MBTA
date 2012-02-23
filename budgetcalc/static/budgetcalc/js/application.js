@@ -125,6 +125,7 @@ jQuery(document).ready(function($) {
                 });
                 $(".alert").hide("slow");
                 $(".social-media").appendTo("header.page-header");
+                $("<li><a class='dia btn btn-mini btn-success' href='http://democracyinaction.org/'' target='_blank'><i class='icon-envelope icon-white'></i> Email Your Legislator</a></li>").appendTo(".social-media ul");
 
                 try {
                     $(".twitter-share-button").remove();
