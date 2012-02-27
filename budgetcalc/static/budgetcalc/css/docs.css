@@ -327,10 +327,6 @@ label {
 /* Share buttons
 -------------------------------------------------- */
 
-.social-media {
-/*  margin-top: 10px;*/
-}
-
 .social-media li {
   float: left;
   display: block;
@@ -339,6 +335,12 @@ label {
 .social-media .email-link, .dia.btn-mini {
   font-weight: bold;
   margin-right: 40px;
+}
+
+.social-media .title {
+  font-weight: 700;
+  float: left;
+  margin-right: 20px;
 }
 
 
@@ -373,6 +375,14 @@ label {
   .navbar .tpic img {
     display: none;
   }
+  .social-media li {
+    float: none;
+    display: normal;
+    margin-top: 10px;
+  }
+  .social-media .title {
+    float: none;
+  }
 }
 
 
@@ -393,6 +403,14 @@ label {
   .navbar .tpic img {
     width: 261px;
     height: 120px;
+  }
+  .social-media li {
+    float: none;
+    display: normal;
+    margin-top: 10px;
+  }
+  .social-media .title {
+    float: none;
   }
 }
 

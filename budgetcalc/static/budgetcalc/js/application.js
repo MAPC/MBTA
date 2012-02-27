@@ -123,10 +123,12 @@ jQuery(document).ready(function($) {
                         $("#option_nr_" + option).html("&times; " + nr);
                     }
                 });
+                // move buttons to the top
                 $(".alert").hide("slow");
-                $(".social-media").appendTo("header.page-header");
-                $("<li><a class='dia btn btn-mini btn-success' href='http://democracyinaction.org/'' target='_blank'><i class='icon-envelope icon-white'></i> Email Your Legislator</a></li>").appendTo(".social-media ul");
+                $("header.page-header").after($("section.social-media"));
+                $("header.page-header").after($("section.dia"));
 
+                // workaround for non-available twitter resources
                 try {
                     $(".twitter-share-button").remove();
                     $(".twitterwidget").prepend("<a href='https://twitter.com/share' class='twitter-share-button' data-url='http://fixthet.mapc.org/' data-text='I came up with my own plan to fix the MBTA Budget and filled the gap by $ " + addCommas(budget['filled']) + "!' data-via='MAPCMetroBoston'>Tweet</a>");
@@ -137,7 +139,11 @@ jQuery(document).ready(function($) {
                     $(".twitterwidget").remove();
                 }
 
+                // update email link
                 $(".email-link .btn").attr("href","mailto:?subject=MBTA Budget Calculator&body=I came up with my own plan to fix the MBTA Budget and filled the gap by $ " + addCommas(budget['filled']) + ". Try yourself at http://fixthet.mapc.org");
+
+                // update submit button
+                $("#budget-btn").html("Re-Submit Your Proposal");
 
                 // show all child options 
                 $.each($("input[name$='-child']"), function (index, value) {
