@@ -76,19 +76,20 @@ jQuery(document).ready(function($) {
     var updateBudget = function () {
         budget = {
             "options" : [],
-            "gap": 161000000,
+            "gap": -161000000,
             "filled": 0
         };
         $(".budget-change").each(function (){
             if ($(this).prop("checked")) {
                 budget["options"].push(parseInt($(this).attr("id").split("_")[1]));
                 budget["filled"] += parseInt($(this).val());
-                budget["gap"] -= parseInt($(this).val());
+                budget["gap"] += parseInt($(this).val());
             }
         });
         $(".tally .budget-filled").html("$ " + addCommas(budget["filled"]));
         $(".tally .budget-gap").html("$ " + addCommas(budget["gap"]));
-        if (budget["gap"] < 0) $(".tally .budget-gap").css("color", "#468847");
+        var budgetColor = (budget["gap"] < 0) ? "#B94A48" : "#333";
+        $(".tally .budget-gap").css("color", budgetColor);
         if ($("#error-nobudget").is(':visible')) $("#error-nobudget").hide("slow");
     }
 
