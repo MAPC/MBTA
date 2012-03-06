@@ -14,8 +14,8 @@ class OptiongroupAdmin(admin.ModelAdmin):
 
 
 class OptionAdmin(admin.ModelAdmin):
-    list_display = ('pk', 'title', 'amount', 'ridership', 'category', 'optiongroup', 'parent', 'order',)
-    list_editable = ('title', 'amount', 'ridership', 'category', 'optiongroup', 'parent', 'order',)
+    list_display = ('pk', 'title', 'amount', 'category', 'optiongroup', 'parent', 'order',)
+    list_editable = ('title', 'amount', 'category', 'optiongroup', 'parent', 'order',)
 
 class SubmissionAdmin(admin.ModelAdmin):
     list_display = ('email', 'budget', )
