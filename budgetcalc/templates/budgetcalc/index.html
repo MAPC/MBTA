@@ -112,7 +112,6 @@
               <tr>
                 <th></th>
                 <th class="impact">Savings or Revenue</th>
-                <th class="impact">Ridership impact</th>
               </tr>
             </thead>
             <tbody>
@@ -120,13 +119,12 @@
               <tr>
                 <td class="category-header"><h1>{{ category.grouper }}</h1></td>
                 <td class="category-header budget-type">{% if category.grouper.cat_type == 'r' %}Revenue{% else %}Savings{% endif %}</td>
-                <td></td>
               </tr>
           {% regroup category.list by optiongroup as optiongroup_list %}
           {% for optiongroup in optiongroup_list %}
               {% if optiongroup.grouper %}
               <tr>
-                <td colspan="3"><h3>{{ optiongroup.grouper }}{% if optiongroup.grouper.form_type = 'r' %}<a class="clear" name="optiongroup_{{ optiongroup.grouper.id }}" title="Clear" data-content="Removes your selections from {{ optiongroup.grouper }}">&times;</a>{% endif %}{% if optiongroup.grouper.desc %}<a class="details" title="Details" data-content="{{ optiongroup.grouper.desc|safe }}">more...</a>{% endif %}</h3></td>
+                <td colspan="2"><h3>{{ optiongroup.grouper }}{% if optiongroup.grouper.form_type = 'r' %}<a class="clear" name="optiongroup_{{ optiongroup.grouper.id }}" title="Clear" data-content="Removes your selections from {{ optiongroup.grouper }}">&times;</a>{% endif %}{% if optiongroup.grouper.desc %}<a class="details" title="Details" data-content="{{ optiongroup.grouper.desc|safe }}">more...</a>{% endif %}</h3></td>
               </tr>
               {% endif %}
 
@@ -136,7 +134,6 @@
               <tr class="input">
                 <td><label class="radio{% if option.parent %} child{% endif %}"><input class="budget-change" type="radio" value="{{ option.amount }}" name="{% if option.parent %}option_{{option.parent.id}}-child{% else %}optiongroup_{{ optiongroup.grouper.id }}{% endif %}"{% if option.parent %}data-parent="option_{{option.parent.id}}" data-optiongroup="optiongroup_{{ optiongroup.grouper.id }}"{% endif %} id="option_{{ option.id }}">{{ option.title }}{% if option.desc %}<a class="details" title="Details" data-content="{{ option.desc|safe }}">more...</a>{% endif %}</label></td>
                 <td class="impact">${{ option.amount|intword }}</td>
-                <td class="impact">{{ option.ridership|default_if_none:"-"|intcomma }}</td>
               </tr>
 
               {% endfor %}
@@ -146,7 +143,6 @@
               <tr class="input">
                 <td><label class="checkbox"{% if option.desc %} title="Details" data-content="{{ option.desc }}"{% endif %}><input class="budget-change" type="checkbox" value="{{ option.amount }}" id="option_{{ option.id }}">{{ option.title }}{% if option.desc|safe %}<a class="details" title="Details" data-content="{{ option.desc }}">more...</a>{% endif %}</label></td>
                 <td class="impact">${{ option.amount|intword }}</td>
-                <td class="impact">{{ option.ridership|default_if_none:"-"|intcomma }}</td>
               </tr>
 
               {% endfor %}
