@@ -21,14 +21,15 @@ a {
 .navbar .tally {
   border-radius: 0 0 0 0;
   height: 100px;
-  background-color: #fff;
   border-bottom: 1px solid #8f939c;
-  background-image: -moz-linear-gradient(top, #fafdff, #cfd2e1);
-  background-image: -ms-linear-gradient(top, #fafdff, #cfd2e1);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#fafdff), to(#cfd2e1));
-  background-image: -webkit-linear-gradient(top, #fafdff, #cfd2e1);
-  background-image: -o-linear-gradient(top, #fafdff, #cfd2e1);
-  background-image: linear-gradient(top, #fafdff, #cfd2e1);
+  background-color: #cfd2e1;
+  background-image: -moz-linear-gradient(top, #fafdff, #cfd2e1); /* FF3.6+ */
+  background-image: -ms-linear-gradient(top, #fafdff, #cfd2e1); /* IE10+ */
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#fafdff), to(#cfd2e1)); /* Chrome,Safari4+ */
+  background-image: -webkit-linear-gradient(top, #fafdff, #cfd2e1); /* Chrome10+,Safari5.1+ */
+  background-image: -o-linear-gradient(top, #fafdff, #cfd2e1); /* Opera 11.10+ */
+  background-image: linear-gradient(top, #fafdff, #cfd2e1); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fafdff', endColorstr='#cfd2e1', GradientType=0); /* IE6-9 */
   background-repeat: repeat-x;
 }
 
