@@ -29,9 +29,8 @@ jQuery(document).ready(function($) {
     // form utils
     // popovers
     $(".budget-builder .details")
-    .popover()
+    .popover();
     $(".budget-builder .clear")
-    .popover()
     .on("click", function () {
         var optionGroup = $(this).attr("name");
         $("input[name='" + optionGroup + "']").prop("checked", false);
@@ -86,10 +85,15 @@ jQuery(document).ready(function($) {
                 budget["gap"] += parseInt($(this).val());
             }
         });
+        if (budget["gap"] < 0) {
+            $(".tally .budget-gap").css("color", "#B94A48");
+            $("#budget-gap-verbose").html("Deficit");
+        } else {
+            $(".tally .budget-gap").css("color", "#333");
+            $("#budget-gap-verbose").html("Surplus");
+        }
         $(".tally .budget-filled").html("$ " + addCommas(budget["filled"]));
-        $(".tally .budget-gap").html("$ " + addCommas(budget["gap"]));
-        var budgetColor = (budget["gap"] < 0) ? "#B94A48" : "#333";
-        $(".tally .budget-gap").css("color", budgetColor);
+        $(".tally .budget-gap").html("$ " + addCommas(Math.abs(budget["gap"])));
         if ($("#error-nobudget").is(':visible')) $("#error-nobudget").hide("slow");
     }
 
