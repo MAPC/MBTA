@@ -1,6 +1,6 @@
 # MBTA outreach tools
 
-http://mbta.mapc.org/
+http://fixthet.mapc.org/
 
 Scope: Application to support outreach for public MBTA budget discussions.
 
