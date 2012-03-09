@@ -40,7 +40,6 @@ def index(request):
             submission.options.add(Option.objects.get(pk=option))
 
         # some stats
-        from django.db.models import Avg
         stats = Submission.objects.aggregate(Avg('budget'), Count('budget'))
         stats['options'] = dict()
         options = Option.objects.annotate(num_submissions=Count('selected_options'))
