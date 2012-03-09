@@ -136,7 +136,7 @@ jQuery(document).ready(function($) {
                 // workaround for non-available twitter resources
                 try {
                     $(".twitter-share-button").remove();
-                    $(".twitterwidget").prepend("<a href='https://twitter.com/share' class='twitter-share-button' data-url='http://fixthet.mapc.org/' data-text='I came up with my own plan to fix the MBTA Budget and filled the gap by $ " + addCommas(budget['filled']) + "!' data-via='MAPCMetroBoston'>Tweet</a>");
+                    $(".twitterwidget").prepend("<a href='https://twitter.com/share' class='twitter-share-button' data-url='http://fixthet.mapc.org/' data-counturl='http://fixthet.mapc.org/budgetcalculator/' data-text='I came up with my own plan to fix the MBTA Budget and filled the gap by $ " + addCommas(budget['filled']) + "!' data-via='MAPCMetroBoston'>Tweet</a>");
                     // re-evaluate twitter widget
                     twttr.widgets.load();
                 } catch (e) {
@@ -148,7 +148,7 @@ jQuery(document).ready(function($) {
                 $(".email-link .btn").attr("href","mailto:?subject=MBTA Budget Calculator&body=I came up with my own plan to fix the MBTA Budget and filled the gap by $ " + addCommas(budget['filled']) + ". Try yourself at http://fixthet.mapc.org");
 
                 // update submit description and button
-                $("#budget-form p.lead").html("If you changed your budget proposal, please submit the updated version again.")
+                $("#budget-form p.lead").html("If you just changed your budget proposal, please submit the updated version again.")
                 $("#budget-btn").html("Re-Submit Updated Proposal");
 
                 // show all child options 
