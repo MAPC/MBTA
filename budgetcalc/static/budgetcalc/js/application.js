@@ -147,8 +147,9 @@ jQuery(document).ready(function($) {
                 // update email link
                 $(".email-link .btn").attr("href","mailto:?subject=MBTA Budget Calculator&body=I came up with my own plan to fix the MBTA Budget and filled the gap by $ " + addCommas(budget['filled']) + ". Try yourself at http://fixthet.mapc.org");
 
-                // update submit button
-                $("#budget-btn").html("Re-Submit Your Proposal");
+                // update submit description and button
+                $("#budget-form p.lead").html("If you changed your budget proposal, please submit the updated version again.")
+                $("#budget-btn").html("Re-Submit Updated Proposal");
 
                 // show all child options 
                 $.each($("input[name$='-child']"), function (index, value) {
