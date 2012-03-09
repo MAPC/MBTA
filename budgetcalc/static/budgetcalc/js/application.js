@@ -136,7 +136,7 @@ jQuery(document).ready(function($) {
                 // workaround for non-available twitter resources
                 try {
                     $(".twitter-share-button").remove();
-                    $(".twitterwidget").prepend("<a href='https://twitter.com/share' class='twitter-share-button' data-url='http://fixthet.mapc.org/' data-counturl='http://fixthet.mapc.org/budgetcalculator/' data-text='I came up with my own plan to fix the MBTA Budget and filled the gap by $ " + addCommas(budget['filled']) + "!' data-via='MAPCMetroBoston'>Tweet</a>");
+                    $(".twitterwidget").prepend("<a href='https://twitter.com/share' class='twitter-share-button' data-url='http://fixthet.mapc.org/' data-counturl='http://fixthet.mapc.org/budgetcalculator/' data-text='I came up with my own plan to fix the MBTA Budget and filled the gap by $ " + addCommas(budget['filled']) + "! #fixthet' data-via='MAPCMetroBoston'>Tweet</a>");
                     // re-evaluate twitter widget
                     twttr.widgets.load();
                 } catch (e) {
