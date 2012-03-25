@@ -1,0 +1,244 @@
+{% load humanize %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <title>Results | MBTA Budget Calculator</title>
+    <meta name="description" content="MBTA Budget Calculator Result Page">
+    <meta name="author" content="MAPC">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="{{ STATIC_URL }}bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}budgetcalc/css/docs.css" rel="stylesheet">
+
+    <style type="text/css">
+
+    .chart {
+      margin-top: 12px;
+      margin-bottom: 12px;
+      font: 14px sans-serif;
+      shape-rendering: crispEdges;
+    }
+
+    .chart rect {
+      stroke: white;
+      fill: #8C96A0; 
+    }
+
+    .chart text.bar {
+      fill: #333;
+    }
+
+    .barchart-container {
+      font: 10px sans-serif;
+    }
+
+    </style>
+
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="{{ STATIC_URL }}img/favicon.ico">
+    <link rel="apple-touch-icon" href="{{ STATIC_URL }}img/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="{{ STATIC_URL }}img/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="{{ STATIC_URL }}img/apple-touch-icon-114x114.png">
+
+    <!-- Facebook Open Graph -->
+    <meta property="og:title" content="MBTA Budget Calculator" />
+    <meta property="og:type" content="government" />
+    <meta property="og:url" content="http://fixthet.mapc.org" />
+    <meta property="og:image" content="http://fixthet.mapc.org/static/budgetcalc/img/t.png" />
+    <meta property="og:site_name" content="MBTA Budget Calculator" />
+    <meta property="fb:admins" content="644656520,607600607" />
+
+    <!-- Google +1 -->
+    <script type="text/javascript">
+      (function() {
+        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+        po.src = 'https://apis.google.com/js/plusone.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+      })();
+    </script>
+    
+    <!-- Google Analytics -->
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-5547782-15']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+
+  </head>
+
+  <body>
+    
+    <!-- Facebook -->
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=176500002460132";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+    
+    <div class="navbar">
+      <div class="mapc-masthead"><div class="container"><img id="mapc-logo" src="{{ STATIC_URL }}budgetcalc/img/mapc-logo.png" alt="Metropolitan Area Planning Council" width="124" height="64" /><img id="mapc-tagline" src="{{ STATIC_URL }}budgetcalc/img/mapc-tagline.png" alt="Metropolitan Area Planning Council" width="475" height="54" /><img id="nu-policy-logo" src="{{ STATIC_URL }}budgetcalc/img/nu-policy-logo.png" alt="Northeastern University" width="226" height="59" /></div></div>
+      <div class="tally">
+        <div class="container">
+          <div class="row">
+            <div class="span8">
+              <div class="row">
+                <div class="span8">
+                  <h1>MBTA Budget Calculator:</h1> 
+                  <small>How Would You Fix the T's Budget?</small>
+                </div>
+              </div>
+              <div class="row">
+                <div class="span8 figure">Results for {{ submissions_count }} submitted budget proposals</div>
+              </div>
+            </div>
+            <div class="span4 tpic">
+              <img src="{{ STATIC_URL }}budgetcalc/img/t.png" alt="T" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <section class="results">
+        <div class="row">
+          <div class="span8 barchart-container">
+            <h2>How often was each budget option selected?</h2>
+            <p>The chart below shows a ranking of how often each budget often has been selected in all submitted budget proposals.</p>
+          </div> 
+        </div>
+      </section>
+
+      <section class="dia">
+        <div class="row">
+          <div class="span8">
+            <div class="well">
+              <h3>Take Action!</h3>
+              <p><a class="dia btn btn-large btn-success" href="http://org2.democracyinaction.org/o/5859/p/dia/action/public/?action_KEY=9739" target="_blank"><i class="icon-envelope icon-white"></i> Email Your Legislator</a><br><small>Opens a new window.</small></p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="social-media">
+        <div class="row">
+          <div class="span8">
+            <div class="well">
+              <span class="title">Share with your friends: </span>
+              <ul class="unstyled">
+                <li class="email-link"><a class="btn btn-mini" href="mailto:?subject=MBTA Budget Calculator&body=See the results of {{ submissions_count }} submitted MBTA Budget Proposals: http://fixthet.mapc.org/budgetcalculator/results/"><i class="icon-envelope"></i> Email</a></li>
+                <li class="twitterwidget"><a href="https://twitter.com/share" class="twitter-share-button" data-url="http://fixthet.mapc.org/budgetcalculator/results/" data-counturl="http://fixthet.mapc.org/budgetcalculator/" data-text="See the results of {{ submissions_count }} submitted MBTA Budget Proposals! #fixthet" data-via="MAPCMetroBoston">Tweet</a>
+                  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script></li>             
+                <li><g:plusone size="medium"></g:plusone></li>
+                <li><div class="fb-like" data-send="false" data-layout="button_count" data-show-faces="false" data-href="http://fixthet.mapc.org/" ></div></li>
+              </ul>
+            </div>
+          </div>
+        </div> 
+      </section>
+
+      <footer class="footer">
+        <p>&copy; 2012 <a href="http://mapc.org" title="Metropolitan Area Planning Council">MAPC</a></p> 
+      </footer>
+
+    </div> <!-- /container -->
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="{{ STATIC_URL }}jquery-1.7.1.min.js"></script>
+    <script src="{{ STATIC_URL }}d3.v2.min.js"></script>
+    <script type="text/javascript">
+
+      // barchart
+
+      var data = {{ chart_values|safe }};
+      var titles = {{ chart_titles|safe }};
+
+      var chartWidth = $("div.barchart-container").innerWidth();
+      var chartHeight = data.length * 28 + 20;
+
+      var x = d3.scale.linear()
+        .domain([0, d3.max(data)])
+        .range([0, chartWidth - 10]);
+
+      var y = d3.scale.ordinal()
+        .domain(data)
+        .rangeBands([0, chartHeight - 20]);      
+
+      var chart = d3.select("div.barchart-container").append("svg")
+          .attr("class", "chart")
+          .attr("width", chartWidth)
+          .attr("height", chartHeight)
+        .append("g")
+          .attr("transform", "translate(10,15)");
+
+      // bars
+      chart.selectAll("rect")
+          .data(data)
+        .enter().append("rect")
+          .attr("y", y)
+          .attr("width", x) // x
+          .attr("height", y.rangeBand());
+
+      // ticks
+      chart.selectAll("line")
+          .data(x.ticks(10))
+        .enter().append("line")
+          .attr("x1", x)
+          .attr("x2", x)
+          .attr("y1", 0)
+          .attr("y2", chartHeight - 20)
+          .style("stroke", "#ccc");
+
+      chart.selectAll(".rule")
+          .data(x.ticks(10))
+        .enter().append("text")
+          .attr("x", x)
+          .attr("y", 0)
+          .attr("dy", -3)
+          .attr("text-anchor", "middle")
+          .text(String);
+
+      // labels
+      chart.selectAll(".bar")
+          .data(data)
+        .enter().append("text")
+          .attr("class", "bar")
+          .attr("x", 10)
+          .attr("y", function(d) { return y(d) + y.rangeBand() / 2; })
+          .attr("dx", -3)
+          .attr("dy", ".35em") // vertical center
+          .attr("text-anchor", "start")
+          .text(function(d, i) { return titles[i] + " (" + d + ")"; });
+
+      chart.append("line")
+          .attr("y1", 0)
+          .attr("y2", chartHeight - 20)
+          .style("stroke", "#666");
+
+    </script>
+  </body>
+</html>

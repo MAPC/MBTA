@@ -52,3 +52,17 @@ def index(request):
                 mimetype='application/json'
             )
 
+
+def results(request):
+
+    submissions = Submission.objects.select_related().all()
+    submissions_count = submissions.count()
+
+    options = Option.objects.annotate(num_submissions=Count('selected_options'))
+    options_sorted = options.order_by('-num_submissions')
+
+    # compiling chart data
+    chart_values = simplejson.dumps([o.num_submissions for o in options_sorted])
+    chart_titles = simplejson.dumps([o.title for o in options_sorted])
+
+    return render_to_response('budgetcalc/results.html', locals(), context_instance=RequestContext(request))

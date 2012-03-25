@@ -1,5 +1,5 @@
 from django.conf.urls.defaults import patterns, include, url
-from django.views.generic.base import RedirectView
+from django.views.generic.base import RedirectView, TemplateView
 
 
 
@@ -9,6 +9,8 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     ('^$', RedirectView.as_view(url='/budgetcalculator/')),
+    # ('^budgetcalculator/results/$', TemplateView.as_view(template_name='budgetcalc/results.html')),
+    url(r'^budgetcalculator/results/', 'mbta.budgetcalc.views.results', name='budgetcalc-results'),
     url(r'^budgetcalculator/', 'mbta.budgetcalc.views.index', name='budgetcalc-index'),
 
     # Uncomment the admin/doc line below to enable admin documentation:
