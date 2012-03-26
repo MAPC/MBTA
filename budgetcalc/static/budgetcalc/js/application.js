@@ -120,15 +120,8 @@ jQuery(document).ready(function($) {
             budget,
             function (data) {
                 // some result stats
-                $(".page-header .lead").html("You are one of " + data["budget__count"] + " users to come up with your own plan to fix the T's budget. Budget proposals so far have had an average combined revenue and savings of <span class='budget-filled'>$ " + addCommas(parseInt(data["budget__avg"])) + "</span>.<br>See how many people chose each option below.");
-                $.each(data["options"], function(option, nr) {
-                    if ($("#option_nr_" + option).length === 0) {
-                        $("#option_" + option).parent().prepend("<span id='option_nr_" + option + "' class='label label-info'>&times; " + nr + "</span>");
-                    } else {
-                        $("#option_nr_" + option).html("&times; " + nr);
-                    }
-                });
-                // move buttons to the top
+                $(".page-header .lead").html("You are one of " + data["budget__count"] + " users to come up with your own plan to fix the T's budget. Budget proposals so far have had an average combined revenue and savings of <span class='budget-filled'>$ " + addCommas(parseInt(data["budget__avg"])) + "</span>.<br>See a detailed ranking of all options on the <a href='/budgetcalculator/results/'>results page</a>.");
+
                 $(".alert").hide("slow");
                 $("header.page-header").after($("section.social-media"));
                 $("header.page-header").after($("section.dia"));
