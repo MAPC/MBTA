@@ -41,11 +41,7 @@ def index(request):
 
         # some stats
         stats = Submission.objects.aggregate(Avg('budget'), Count('budget'))
-        stats['options'] = dict()
-        options = Option.objects.annotate(num_submissions=Count('selected_options'))
-        for option in options:
-            stats['options'][option.id] = option.num_submissions
-
+        
         return HttpResponse(
                 simplejson.dumps(stats),
                 status=201,
